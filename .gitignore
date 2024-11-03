@@ -1,0 +1,179 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+########### Node.js / Next.js specific ignores
+
+# Node.js dependencies
+Frontend/rental_app_next/node_modules/
+
+# Build output
+Frontend/rental_app_next/.next/
+Frontend/rental_app_next/out/
+
+# Local environment variables
+Frontend/rental_app_next/.env
+Frontend/rental_app_next/.env.local
+Frontend/rental_app_next/.env.development
+Frontend/rental_app_next/.env.production
+
+# Log files
+Frontend/rental_app_next/npm-debug.log*
+Frontend/rental_app_next/yarn-debug.log*
+Frontend/rental_app_next/yarn-error.log*
+
+# Cache
+Frontend/rental_app_next/.cache/
+
+# Temporary files
+Frontend/rental_app_next/*.tmp
+Frontend/rental_app_next/*.temp
+
+# IDE/Editor specific files
+Frontend/rental_app_next/.idea/
+Frontend/rental_app_next/.vscode/
+Frontend/rental_app_next/*.sublime-project
+Frontend/rental_app_next/*.sublime-workspace
+
+# MacOS specific files
+Frontend/rental_app_next/.DS_Store
+
+# Next.js specific ignores
+Frontend/rental_app_next/*.next/
+Frontend/rental_app_next/.next/**
+Frontend/rental_app_next/*.cache/
+
+##############################################################
+
+# Django specific ignores
+# Python bytecode
+**/*.py[cod]
+**/__pycache__/
+**/*.pyo
+**/*.pyd
+
+# Environment variables
+**/.env
+**/.env.local
+**/.env.development
+**/.env.production
+
+# Virtual environment
+**/venv/
+**/env/
+**/.venv/
+**/.env/
+**/env.bak/
+
+# Database files
+**/db.sqlite3
+**/*.sqlite3
+
+# Migration files
+**/rental_app/migrations/
+**/rantal_sp/migrations/
+**/migrations/
+
+# Log files
+**/*.log
+**/logs/
+
+# Coverage reports
+**/.coverage
+**/coverage/
+**/htmlcov/
+
+# Static files
+**/staticfiles/
+**/static/
+**/media/
+**/uploads/
+
+# IDE/editor specific files
+.idea/
+*.sublime-project
+*.sublime-workspace
+.vscode/
+*.swp
+*.swm
+*.swo
+
+# MacOS specific files
+.DS_Store
+
+# Python egg and build directories
+**/*.egg-info/
+**/build/
+**/dist/
+*.egg
+*.whl
+
+# PyInstaller
+# If you get a PyInstaller spec file, ignore it
+*.spec
+
+# Local environment files
+local_settings.py
+settings/local.py
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Miscellaneous
+*.orig
+*.bak
+*.tmp
+
+# Backup files
+*~
+
+##############################################################
+
+# Ignore logs
+**/Backend/logs/
+# Ignore coverage reports
+**/Backend/.coverage
+**/Backend/htmlcov/
+
+##############################################################
+
+
+# dependencies
+node_modules/
+/node_modules
+**/node_modules/
+/.pnp
+.pnp.js
+.yarn/install-state.gz
+
+# testing
+/coverage
+
+# next.js
+/.next/
+**/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# local env files
+.env*.local
+
+.env
+**/.env
+**/.env/
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
