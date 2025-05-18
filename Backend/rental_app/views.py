@@ -322,8 +322,11 @@ def logout_view(request):
     response.delete_cookie('user_data')
     return response
 
-# GET User reports
 
+
+
+
+# GET User reports
 @api_view(['GET'])
 def get_user_report(request):
     # Retrieve query parameters for filtering
@@ -333,7 +336,6 @@ def get_user_report(request):
 
         # Filter users based on provided dates
         users = usertable.objects.all()
-
         if start_date:
             parsed_start_date = parse_datetime(start_date)
             if not parsed_start_date:

@@ -25,19 +25,25 @@
                       <div class="col-4 text-center">
                         <a href="#">Profile</a>
                       </div>
-                      <div class="col-4 text-center">
+                      {% comment %} <div class="col-4 text-center">
                         <a href="#">Team</a>
-                      </div>
-                      <div class="col-4 text-center">
+                      </div> {% endcomment %}
+                      {% comment %} <div class="col-4 text-center">
                         <a href="#">Friends</a>
-                      </div>
+                      </div> {% endcomment %}
                     </div>
                     <!-- /.row -->
                   </li>
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <a href="{% block change_password_url %}{% url 'admin:password_change' %}{% endblock %}" class="btn btn-default btn-flat">{% trans 'Change Password'%}</a>
-                    <a href="{% block logout_url %}{% logout_url %}{% endblock %}" class="btn btn-default btn-flat float-right">{% trans 'Sign Out'%}<a>
+                    
+                    <form action="{% url 'admin:logout' %}" method="post" style="display:inline;">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-default btn-flat float-right">
+                          {% trans 'Sign Out' %}
+                      </button>
+                    </form>
                   </li>
                 </ul>
               </li>

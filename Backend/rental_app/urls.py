@@ -3,7 +3,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework.routers import DefaultRouter
 from rest_framework import viewsets
-from .views import UserdetailView, ContactusView, FeedbackView, UserRegistrationView, VerifyAccountView, check_loginx, export_user_report_in_csv, export_user_report_in_pdf, get_user_report, login_view, check_login
+from .views import UserdetailView, ContactusView, FeedbackView, UserRegistrationView, VerifyAccountView, check_loginx, export_user_report_in_csv, export_user_report_in_pdf, get_user_report, login_view, check_login, logout_view
 
 
 # router = DefaultRouter()
@@ -21,7 +21,7 @@ urlpatterns = [
     path("accounts/login", login_view, name="login"),
     path('accounts/verify/<str:auth_token>/', VerifyAccountView.as_view(), name='account-verify'),
     
-    
+    path("accounts/u/logout", logout_view, name="logout"),
 
     path('api/get/user-report/', get_user_report, name='get_user_report'),
     # http://127.0.0.1:8000/api/get/user-report/?start_date=2024-10-11&end_date=2024-10-14

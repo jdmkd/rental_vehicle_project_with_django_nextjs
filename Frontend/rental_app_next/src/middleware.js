@@ -9,8 +9,9 @@ export function middleware(req) {
 
   if (accessToken && user_data) {
         // If token exists, block access to login or register and redirect to home page
-        
-        return NextResponse.redirect(new URL('/', req.url));
+        // console.log("accessToken ::",accessToken);
+        // console.log("user_data ::",user_data);
+        // return NextResponse.redirect(new URL('/', req.url));
   }
 
   // If token doesn't exist, allow access to the page

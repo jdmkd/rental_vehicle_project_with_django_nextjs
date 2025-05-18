@@ -27,17 +27,50 @@ export const Header = () => {
   const router = useRouter();
 
   useEffect(() => {
-    const accessToken = localStorage.getItem("access_token");
-    const storedUserData = localStorage.getItem("user_data");
+    const isTokenExpired = (token) => {
+      if(token){
+        const decoded = JSON.parse(atob(token.split('.')[1]));
+        return decoded.exp * 1000 < Date.now();
+      }
+      else{
+        return true
 
-    if (storedUserData) {
-      setUserData(JSON.parse(storedUserData));
+      }
+    };
+    
+    // Retrieve the access token from cookies
+    const getCookie = (name) => {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+      return null;
+    };
+
+
+    const is_authenticated = async (event) => {
+        const accessToken = getCookie("access_token"); // Retrieves the "access_token" cookie
+        const user_data = getCookie("user_data"); // Retrieves the "user_data" cookie
+        console.log("accessToken ::",accessToken);
+        console.log("user_data ::",user_data);
+
+        if (accessToken && !isTokenExpired(accessToken) || user_data) {
+          // router.push("/");
+          console.log("User is authentivated, already logged in.");
+          setUserData(JSON.parse(user_data));
+        }
+
+        if (!accessToken && isTokenExpired(accessToken)) {
+          // setMessageType("error");
+          // setMessage("Login required");
+          console.log("not authenticated.");
+          localStorage.removeItem("access_token");
+          // router.push("accounts/login"); // Redirect to login
+        }
     }
 
-    if (!accessToken) {
-      return;
-    }
+    
 
+    is_authenticated();
     // Add additional check login logic here...
 
   }, []);
@@ -45,21 +78,30 @@ export const Header = () => {
 
   
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     console.log("handleLogout Called!!");
-    localStorage.removeItem("access_token");
-    localStorage.removeItem("refresh_token");
-    localStorage.removeItem("user_data"); 
-
-    document.cookie = 'access_token=; Max-Age=0; path=/;';
-    document.cookie = 'refresh_token=; Max-Age=0; path=/;';
-    document.cookie = 'user_data=; Max-Age=0; path=/;';
+    try {
+        const response = await fetch('http://127.0.0.1:8000/accounts/u/logout', {
+            method: 'POST',
+            credentials: 'include', // Ensures cookies are sent with the request
+        });
+        if (response.ok) {
+            console.log("Logged out successfully");
+            // Redirect or update state as needed
+            document.cookie = 'access_token=; Max-Age=0; path=/;';
+            document.cookie = 'refresh_token=; Max-Age=0; path=/;';
+            document.cookie = 'user_data=; Max-Age=0; path=/;';
+            
+            setUserData(null); 
+            console.log("now redirected on the login page!!");
+            router.push('/accounts/login');
+        } else {
+            console.error("Logout failed");
+        }
+    } catch (error) {
+        console.error("Error logging out:", error);
+    }
     
-    setUserData(null); 
-
-    console.log("You successfully Logged out");
-    router.push('/accounts/login');
-    console.log("now redirected on the login page!!");
   };
 
   

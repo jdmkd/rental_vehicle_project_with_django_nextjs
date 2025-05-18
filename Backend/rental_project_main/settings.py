@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework_simplejwt',
     'rental_app',
     'rental_sp',
 
@@ -75,8 +76,6 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:3000',
     'http://localhost:3000',
-    'http://127.0.0.1:8000',
-    'http://localhost:8000',
 ]
 
 # CsrfViewMiddleware.csrf_failure = lambda request, reason: HttpResponse("CSRF token missing", status=403)
@@ -84,8 +83,7 @@ CsrfViewMiddleware.csrf_failure = lambda request, reason: HTTPResponse("CSRF tok
 
 CORS_ALLOW_CREDENTIALS = True  # Ensure credentials (cookies) are allowed
 CORS_ORIGIN_WHITELIST = ['http://127.0.0.1:3000',
-                         'http://localhost:3000',
-                         'http://127.0.0.1:8000',]  # Add your frontend's origin
+                         'http://localhost:3000',]  # Add your frontend's origin
 
 CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:3000',
                         'http://localhost:3000',]
@@ -93,15 +91,16 @@ CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:3000',
 CORS_ALLOW_HEADERS = ['Content-Type', 'Authorization']
 CORS_ORIGIN_ALLOW_ALL = False
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
-SESSION_COOKIE_SAMESITE = 'None'  # This allows the cookie to be sent with cross-origin requests
+# SESSION_COOKIE_SAMESITE = 'None'  # This allows the cookie to be sent with cross-origin requests
 SESSION_COOKIE_HTTPONLY = True
-SESSION_COOKIE_SECURE = False  # Set to True in production with HTTPS
+SESSION_COOKIE_SECURE = True  # Set to True in production with HTTPS
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False  # Set False to keep the session alive
 SESSION_SAVE_EVERY_REQUEST = True
 
 CSRF_COOKIE_SECURE = True
-
+CSRF_COOKIE_HTTPONLY = True
+CSRF_COOKIE_SAMESITE = 'Lax'  # or 'Strict' if possible
 
 
 
@@ -220,10 +219,11 @@ USE_TZ = True
 mimetypes.add_type("text/css", ".css", True)
 
 STATIC_URL = '/static/'
-
-
-
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, "static"),
+# ]
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
@@ -241,7 +241,7 @@ EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = "starlettecars@gmail.com"
-EMAIL_HOST_PASSWORD = "ectw mmrk thqt rkiv"
+EMAIL_HOST_PASSWORD = "vvff pfdl xnln bgsd"
 
 
 # If you're developing locally, consider using Django's console email backend for testing, which prints the email content to the console instead of sending it:

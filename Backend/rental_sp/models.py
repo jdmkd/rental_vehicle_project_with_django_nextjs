@@ -54,9 +54,11 @@ class buss_vehicle(models.Model):
     buss_vehicle_id = models.CharField(max_length=10, default='BUS1000')
     VEHICLE_COMPANY_CHOICES = (
         ('Toyota', 'Toyota'),
+        ('Mahindra','Mahindra'),
         ('Honda', 'Honda'),
         ('Ford', 'Ford'),
         ('Chevrolet', 'Chevrolet'),
+        ('Tata Motors', 'Tata Motors'),
         ('Nissan', 'Nissan'),
         ('Volkswagen', 'Volkswagen'),
         ('BMW', 'BMW'),

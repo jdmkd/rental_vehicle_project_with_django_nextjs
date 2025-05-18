@@ -66,12 +66,12 @@
                                 </a>
                                 {% if model.add_url %}
                                 <a href="{{ model.add_url }}" class="btn btn-default btn-xs btn-block"><i
-                                        class="fa fa-plus"></i> {%trans 'Add' %}</a>
+                                        class="fa fa-plus"></i> {% trans 'Add' %}</a>
                                 {% endif %}
                                 {% if model.admin_url %}
                                 <a href="{{ model.admin_url }}" class="btn btn-warning btn-xs btn-block"><i
                                         class="fa fa-pencil"></i>
-                                    {%trans 'Change' %}</a>
+                                    {% trans 'Change' %}</a>
                                 {% endif %}
                             </div>
 

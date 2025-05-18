@@ -26,9 +26,21 @@ const Login = () => {
       }
     };
     
+    // Retrieve the access token from cookies
+    const getCookie = (name) => {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+      return null;
+    };
+
+
     const check_Login = async (event) => {
-        const accessToken = localStorage.getItem("access_token");
-        const storedUserData = localStorage.getItem("user_data");
+        const accessToken = getCookie("access_token"); // Retrieves the "access_token" cookie
+        const storedUserData = getCookie("user_data");
+        // console.log("accessToken ::",accessToken);
+        // console.log("storedUserData ::",storedUserData);
+
         if (accessToken && !isTokenExpired(accessToken) || storedUserData) {
           router.push("/");
           setUserData(JSON.parse(storedUserData));
@@ -65,13 +77,13 @@ const Login = () => {
         const data = await response.json();
 
         // Save tokens and user data to localStorage
-        localStorage.setItem("access_token", data.access_token);
-        localStorage.setItem("refresh_token", data.refresh_token);
-        localStorage.setItem("user_data", JSON.stringify(data.userdata));
+        // localStorage.setItem("access_token", data.access_token);
+        // localStorage.setItem("refresh_token", data.refresh_token);
+        // localStorage.setItem("user_data", JSON.stringify(data.userdata));
 
-        // document.cookie = `access_token=${data.access_token}; path=/; secure; HttpOnly`;
-        // document.cookie = `refresh_token=${data.refresh_token}; path=/; secure; HttpOnly`;
-        // document.cookie = `user_data=${JSON.stringify(data.user_data)}; path=/; secure; HttpOnly`;
+        document.cookie = `access_token=${data.access_token}; path=/; secure;`;
+        document.cookie = `refresh_token=${data.refresh_token}; path=/; secure;`;
+        document.cookie = `user_data=${JSON.stringify(data.userdata)}; path=/; secure;`;
 
         setUserData(data.userdata); 
         setMessageType("success");
